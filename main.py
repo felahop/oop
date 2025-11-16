@@ -44,11 +44,13 @@ class Student:
             return 'Ошибка'
         return self.average_grade() == other.average_grade()
 
+
 class Mentor:
     def __init__(self, name, surname):
         self.name = name
         self.surname = surname
         self.courses_attached = []
+
 
 class Lecturer(Mentor):
     def __init__(self, name, surname):
@@ -82,6 +84,7 @@ class Lecturer(Mentor):
             return 'Ошибка'
         return self.average_grade() == other.average_grade()
 
+
 class Reviewer(Mentor):
     def rate_hw(self, student, course, grade):
         if isinstance(student, Student) and course in self.courses_attached and course in student.courses_in_progress:
@@ -98,33 +101,27 @@ class Reviewer(Mentor):
 
 def average_homework(students, course):
     all_grades = []
-
     for student in students:
         if not isinstance(student, Student):
             continue
-
         if course in student.grades and student.grades[course]:
             all_grades.extend(student.grades[course])
-
     if not all_grades:
         return 0.0
-
     return sum(all_grades) / len(all_grades)
+
 
 def average_grade_lect(lecturers, course):
     all_grades = []
-
     for lecturer in lecturers:
         if not isinstance(lecturer, Lecturer):
             continue
-
         if course in lecturer.grades and lecturer.grades[course]:
             all_grades.extend(lecturer.grades[course])
-
     if not all_grades:
         return 0.0
-
     return sum(all_grades) / len(all_grades)
+
 
 lecturer1 = Lecturer('Иван', 'Иванов')
 lecturer2 = Lecturer('Кирилл', 'Епов')
